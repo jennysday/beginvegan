@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="RecipeDAOTemp">
+
+	<insert id="insertRecipe">
+		<![CDATA[
+		insert into recipe(recipe_number, recipe_category, recipe_name, recipe_ingredient, recipe_content, recipe_image01, recipe_image02, recipe_image03) values((select nvl(max(recipe_number), 0)+1 from recipe), #{recipe_category}, #{recipe_name}, #{recipe_ingredient}, #{recipe_content}, #{recipe_image01, jdbcType=VARCHAR}, #{recipe_image02, jdbcType=VARCHAR}, #{recipe_image03, jdbcType=VARCHAR}) 
+		]]>
+	</insert>
+	
+	<select id="adminRecipeList" resultType="recipe">
+		<![CDATA[
+		select recipe_number, recipe_category, recipe_name, recipe_image01, recipe_date from recipe order by recipe_number asc
+		]]>
+	</select>
+	
+	<select id="recipeList" resultType="recipe">
+		<![CDATA[
+		select recipe_number, recipe_category, recipe_name, recipe_image01 from recipe order by recipe_number asc
+		]]>
+	</select>
+	
+	<select id="adminRecipeDetail" resultType="recipe">
+		<![CDATA[
+		select recipe_number, recipe_category, recipe_name, recipe_ingredient, recipe_content, recipe_image01, recipe_image02, recipe_image03 from recipe where recipe_number=#{recipe_number}
+		]]>
+	</select>
+	
+	<select id="recipeDetail" resultType="recipe">
+		<![CDATA[
+		select recipe_number, recipe_category, recipe_name, recipe_ingredient, recipe_content, recipe_image01, recipe_image02, recipe_image03 from recipe where recipe_number=#{recipe_number}
+		]]>
+	</select>
+	
+	<update id="modifyRecipe">
+		<![CDATA[
+		update recipe set recipe_number=#{recipe_number}, recipe_category=#{recipe_category}, recipe_name=#{recipe_name}, recipe_ingredient=#{recipe_ingredient}, recipe_content=#{recipe_content}, recipe_image01=#{recipe_image01, jdbcType=VARCHAR}, recipe_image02=#{recipe_image02, jdbcType=VARCHAR}, recipe_image03=#{recipe_image03, jdbcType=VARCHAR} where recipe_number=#{recipe_number}
+		]]>
+	</update>
+	
+	<delete id="deleteRecipe">
+		<![CDATA[
+		delete from recipe where recipe_number=#{recipe_number}
+		]]>
+	</delete>
+
+</mapper>
+
+
+

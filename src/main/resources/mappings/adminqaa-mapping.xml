@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdminQaaBoardDAOTemp">
+	
+	<insert id="insertBoard">
+		<![CDATA[
+			insert into QAA(seq, id, content, re_ref, re_lev, status)  
+			values(
+			(Select nvl(max(seq),0)+1 from QAA), 'admin', #{content}, #{re_ref}, 2, '답변 완료')
+		]]>
+	</insert>
+	
+	<update id="updateStatus">
+		<![CDATA[	
+			update QAA set status='답변 완료' where re_ref=#{re_ref}
+		]]>
+	</update>
+	
+		<update id="updateStatus2">
+		<![CDATA[	
+			update QAA set status='등록 완료' where re_ref=#{re_ref}
+		]]>
+	</update>
+	
+	
+	<update id="updateBoard">
+		<![CDATA[	
+			update QAA set content=#{content} where seq=#{seq}
+		]]>
+	</update>
+	
+	<delete id="deleteBoard">
+		<![CDATA[
+			delete QAA where re_ref=#{re_ref}
+		]]>
+	</delete>
+	
+	<delete id="deleteReply">
+		<![CDATA[
+			delete QAA where seq=#{seq}
+		]]>
+	</delete>
+	
+	<select id="checkReply" resultType="Integer">
+		<![CDATA[
+			select count(*) from (select * from QAA where re_ref=#{re_ref} and re_lev=2)
+		]]>
+	</select>
+	
+	<select id="getBoard" resultType="adminqaa">
+		<![CDATA[
+			select * from QAA where re_ref=#{re_ref} and re_lev=1
+		]]>
+	</select>
+	
+	
+	<select id="getReply" resultType="adminqaa">
+		<![CDATA[
+			select * from QAA where re_ref=#{re_ref} and re_lev=2
+		]]>
+	</select>
+	
+	<select id="getBoardList" resultType="adminqaa">
+		<![CDATA[
+			select * from QAA where re_lev=1 order by seq desc
+		]]>
+	</select>
+	
+	<select id="getBoardList_S" resultType="adminqaa">
+		<![CDATA[	
+			select * from QAA where subject like '%'||#{searchKeyword}||'%' order by seq desc
+		]]>
+	</select>
+	
+	<select id="getBoardList_C" resultType="adminqaa">
+		<![CDATA[
+			select * from QAA where content like '%'||#{searchKeyword}||'%' order by seq desc
+		]]>
+	</select>
+	
+	<select id="getBoardList_I" resultType="adminqaa">
+		<![CDATA[
+			select * from QAA where id like '%'||#{searchKeyword}||'%' order by seq desc
+		]]>
+	</select>
+	
+	<select id="getBoardList_statusfilter" resultType="adminqaa">
+		<![CDATA[
+			select * from QAA where status=#{filterStatus} and re_lev=1 order by seq desc
+		]]>
+	</select>
+	
+	<select id="getBoardList_catfilter" resultType="adminqaa">
+		<![CDATA[
+			select * from QAA where category=#{filterCategory} and re_lev=1 order by seq desc
+		]]>
+	</select>
+	
+	
+	
+
+</mapper>

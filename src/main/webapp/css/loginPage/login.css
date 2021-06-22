@@ -1,0 +1,112 @@
+@charset "UTF-8";
+
+#input {
+	font-family: 'Nanum Gothic', sans-serif; 
+	height: 40px; 
+	margin: 5px 5px; 
+	font-size: 10pt;
+}
+
+#zipcodeinput {
+	font-family: 'Nanum Gothic', sans-serif; 
+	height: 40px; 
+	font-size: 10pt;
+	margin-left: 5px;
+}
+
+input:focus { /* 아이디/비밀번호 커서로 클릭했을 때 */
+	outline-color: #213421;
+}
+
+#radio {
+	font-family: 'Nanum Gothic', sans-serif; 
+	margin: 5px 5px; 
+	font-size: 10pt;
+}
+
+#style { /* 배경색O */
+	width: 70px; 
+	padding: .5em .3em;
+	border: 1px solid #CACAC6;
+	font-family: inherit; 
+	font-size: 2;
+	background-color:#213429; 
+	color:white;
+	border-radius: 5px; 
+	appearance: none; 
+	-webkit-appearance: none; 
+	-moz-appearance: none;
+}
+
+#style:hover { /* input 단추 hover */
+	background-color: #3d5b3d;
+	color: white;
+}
+
+#style2 { /* 배경색X */
+	border: 1px solid #CACAC6;
+	font-size: 10pt;
+	color:#213421;
+	border-radius: 5px; 
+	font-family: 'Nanum Gothic', sans-serif; 
+	display:inline-block; 
+	line-height:3;
+	width:90px; 
+	height:40px; 
+	margin: 10px; 
+	border-color: #213429; 
+}
+
+#idpw {
+	width: 70px; 
+	padding: .5em .3em;
+	font-family: inherit; 
+	font-size: 10pt;
+	background-color:white; 
+	color: #213429;
+	border-radius: 5px; 
+	appearance: none; 
+	-webkit-appearance: none; 
+	-moz-appearance: none;
+}
+
+a {
+	text-decoration: none;
+	text-align: center;
+}
+
+.chk_btn {
+    border-radius: 8px;
+    font-size: 14px;
+    padding: 10px 15px;
+    background-color: #213421;
+    transition: all 0.3s;
+    color: #ffffff;
+    border: none;
+    transition: all 0.3s;
+    margin: 50px 0px;
+}
+
+.chk_btn:hover{
+    background-color: #649E64;
+}
+
+.checks {position: relative;} 
+.checks input[type="radio"] { 
+	position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip:rect(0,0,0,0); border: 0; 
+} 
+.checks input[type="radio"] + label { 
+	display: inline-block; position: relative; padding-left: 30px; cursor: pointer; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; 
+} 
+.checks input[type="radio"] + label:before { 
+	content: ''; position: absolute; top: -4px; left:0px; width: 21px; height: 21px; text-align: center; background:white; border-radius: 100%; box-shadow: 0px 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05); 
+} 
+.checks input[type="radio"]:checked + label:before { 
+	background:#213429; 
+} 
+.checks input[type="radio"]:checked + label:after { 
+	content: ''; position: absolute; top: 1px; left: 5px; width: 11px; height: 11px; background:white; border-radius: 100%; 
+}
+.st0 {
+	fill:none; width: 30px; height: 30px;
+}

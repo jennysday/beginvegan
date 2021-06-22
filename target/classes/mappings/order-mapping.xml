@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="OrderBoardDAOTemp">
+	
+	<update id="createCheckOutTable">
+		<![CDATA[
+			create table checkout_temp_${order_member_id} as 
+			select 
+			member.seq as order_member_seq, member.id as order_member_id, 
+			goods.image01 as order_goods_image, goods.name as order_goods_name, 
+			goods.price as order_goods_price, goods.amount as order_goods_amount, 
+			basket.goods_seq as order_goods_num, basket.amount as order_goods_count  
+			from basket 
+			inner join goods 
+			on basket.goods_seq = goods.seq 
+			inner join member 
+			on basket.member_seq = member.seq 
+			where basket.member_seq = (select seq from member where id ='${order_member_id}') order by basket.reg_date
+		]]>
+	</update>
+	
+	<update id="createCheckOutTableOnlyThis">
+		<![CDATA[
+			create table checkout_temp_${order_member_id} as 
+			select member.seq as order_member_seq, member.id as order_member_id, goods.image01 as order_goods_image, goods.name as order_goods_name, goods.price as order_goods_price, goods.amount as order_goods_amount 
+			from member, goods 
+			where member.seq = (select seq from member where id ='${order_member_id}') and goods.seq=${order_goods_num}
+		]]>
+	</update>
+	
+	<update id="alterOrder_numOnlyThis">
+		<![CDATA[
+			alter table checkout_temp_${order_member_id}  
+			add ( 
+				order_goods_num   NUMBER, 
+				order_goods_count   NUMBER	)
+		]]>
+	</update>
+	
+	<update id="updateOrder_numOnlyThis">
+		<![CDATA[
+			update checkout_temp_${order_member_id} set 
+			order_goods_num=${order_goods_num}, order_goods_count=${order_goods_count}
+		]]>
+	</update>
+	
+	<update id="alterOrder_num">
+		<![CDATA[
+			alter table checkout_temp_${order_member_id} 
+			add (
+			order_tradenum VARCHAR2(100), 
+			order_num number, 
+			order_member_ordernum number, 
+			order_date date DEFAULT SYSDATE, 
+			order_status number DEFAULT 0,
+			order_receive_name VARCHAR2(20), 
+			order_receive_addr1 VARCHAR2(70), 
+			order_receive_addr2 VARCHAR2(70), 
+			order_receive_phone VARCHAR2(13), 
+			order_receive_email VARCHAR2(25), 
+			order_receive_zipcode1 VARCHAR2(13), 
+			order_receive_zipcode2 VARCHAR2(13), 
+			order_memo VARCHAR2(3000), 
+			order_sum_money number, 
+			order_trade_type VARCHAR2(20), 
+			order_trade_payer  VARCHAR2(20)
+			)
+		]]>
+	</update>
+	
+	<update id="updateOrder_num">
+		<![CDATA[
+			update checkout_temp_${order_member_id} set 
+			order_num=(select nvl(max(order_num), 0)+1 from goods_order), 
+			order_member_ordernum = (select nvl(count(order_num),0)+1 from (select order_num from (select * from goods_order where order_member_id='${order_member_id}') 
+			group by order_num)), 
+			order_receive_name=(select name from member where id='${order_member_id}'), 
+			order_receive_addr1=(select addr1 from member where id='${order_member_id}'), 
+			order_receive_addr2=(select addr2 from member where id='${order_member_id}'), 
+			order_receive_phone=(select phone from member where id='${order_member_id}'), 
+			order_receive_email=(select email from member where id='${order_member_id}'), 
+			order_receive_zipcode1=(select zipcode1 from member where id='${order_member_id}'), 
+			order_receive_zipcode2=(select zipcode2 from member where id='${order_member_id}')
+		]]>
+	</update>
+	
+	<!-- <update id="renameCheckOutTable">
+		<![CDATA[
+			ALTER TABLE checkout_temp_${order_member_id} rename to checkout_temp_#{order_num}
+		]]>
+	</update>
+	
+	<select id="getOrderTmpList" resultType="order">
+		<![CDATA[
+			select * from checkout_temp_#{order_num}
+		]]>
+	</select>
+
+	
+	<select id="getMemberInfo" resultType="order">
+		<![CDATA[
+			select * from checkout_temp_#{order_num} where rownum=1
+		]]>
+	</select>
+
+	<update id="insertInfo">
+		<![CDATA[
+			update checkout_temp_#{order_num} set 
+			order_tradenum='${order_tradenum}', 
+			order_receive_name='${order_receive_name}', 
+			order_receive_addr1='${order_receive_addr1}', 
+			order_receive_addr2='${order_receive_addr2}', 
+			order_receive_zipcode1='${order_receive_zipcode1}', 
+			order_receive_zipcode2='${order_receive_zipcode2}', 
+			order_receive_phone='${order_receive_phone}', 
+			order_memo='${order_memo}', 
+			order_sum_money=${order_sum_money}, 
+			order_trade_type='${order_trade_type}', 
+			order_trade_payer='${order_trade_payer}'
+		]]>
+	</update>
+
+	
+    <insert id="copyTemp">
+		<![CDATA[
+			insert into goods_order ( order_member_seq, order_member_id, order_goods_image, 
+	 order_goods_name, order_goods_price, order_goods_amount, order_goods_num, order_goods_count, 
+	 order_tradenum, order_num, order_member_ordernum, order_date, order_status, 
+	 order_receive_name, order_receive_addr1, order_receive_addr2, order_receive_phone, 
+	order_receive_email, order_receive_zipcode1, order_receive_zipcode2, 
+	 order_memo, order_sum_money, order_trade_type, order_trade_payer) 
+			select order_member_seq, order_member_id, order_goods_image, 
+	 order_goods_name, order_goods_price, order_goods_amount - order_goods_count, order_goods_num, order_goods_count, 
+	 order_tradenum, order_num, order_member_ordernum, order_date, order_status, 
+	 order_receive_name, order_receive_addr1, order_receive_addr2, order_receive_phone, 
+	order_receive_email, order_receive_zipcode1, order_receive_zipcode2, 
+	 order_memo, order_sum_money, order_trade_type, order_trade_payer from checkout_temp_#{order_num}
+		]]>
+	</insert>
+	
+	<update id="goodsAmountDecrease">
+		<![CDATA[
+			MERGE INTO GOODS G  
+			USING (SELECT ORDER_NUM, ORDER_GOODS_NUM, ORDER_GOODS_AMOUNT 
+			FROM  GOODS_ORDER WHERE ORDER_NUM=(SELECT MAX(ORDER_NUM) FROM GOODS_ORDER)) O 
+			ON (G.SEQ = O.ORDER_GOODS_NUM) 
+			WHEN MATCHED THEN UPDATE SET G.AMOUNT = O.ORDER_GOODS_AMOUNT
+		]]>
+	</update>
+	
+	<update id="dropCheckOutTable">
+		<![CDATA[
+			drop table checkout_temp_#{order_num} purge
+		]]>
+	</update> -->
+	
+	
+	
+	
+	
+<select id="getOrderTmpList" resultType="order">
+		<![CDATA[
+			select * from checkout_temp_${order_member_id}
+		]]>
+	</select>
+
+	
+	<select id="getMemberInfo" resultType="order">
+		<![CDATA[
+			select * from checkout_temp_${order_member_id} where rownum=1
+		]]>
+	</select>
+
+	<update id="insertInfo">
+		<![CDATA[
+			update checkout_temp_${order_member_id} set 
+			order_tradenum='${order_tradenum}', 
+			order_receive_name='${order_receive_name}', 
+			order_receive_addr1='${order_receive_addr1}', 
+			order_receive_addr2='${order_receive_addr2}', 
+			order_receive_zipcode1='${order_receive_zipcode1}', 
+			order_receive_zipcode2='${order_receive_zipcode2}', 
+			order_receive_phone='${order_receive_phone}', 
+			order_memo='${order_memo}', 
+			order_sum_money=${order_sum_money}, 
+			order_trade_type='${order_trade_type}', 
+			order_trade_payer='${order_trade_payer}'
+		]]>
+	</update>
+
+	
+    <insert id="copyTemp">
+		<![CDATA[
+			insert into goods_order ( order_member_seq, order_member_id, order_goods_image, 
+	 order_goods_name, order_goods_price, order_goods_amount, order_goods_num, order_goods_count, 
+	 order_tradenum, order_num, order_member_ordernum, order_date, order_status, 
+	 order_receive_name, order_receive_addr1, order_receive_addr2, order_receive_phone, 
+	order_receive_email, order_receive_zipcode1, order_receive_zipcode2, 
+	 order_memo, order_sum_money, order_trade_type, order_trade_payer) 
+			select order_member_seq, order_member_id, order_goods_image, 
+	 order_goods_name, order_goods_price, order_goods_amount - order_goods_count, order_goods_num, order_goods_count, 
+	 order_tradenum, order_num, order_member_ordernum, order_date, order_status, 
+	 order_receive_name, order_receive_addr1, order_receive_addr2, order_receive_phone, 
+	order_receive_email, order_receive_zipcode1, order_receive_zipcode2, 
+	 order_memo, order_sum_money, order_trade_type, order_trade_payer from checkout_temp_${order_member_id}
+		]]>
+	</insert>
+	
+	<update id="goodsAmountDecrease">
+		<![CDATA[
+			MERGE INTO GOODS G  
+			USING (SELECT ORDER_NUM, ORDER_GOODS_NUM, ORDER_GOODS_AMOUNT 
+			FROM  GOODS_ORDER WHERE ORDER_NUM=(SELECT MAX(ORDER_NUM) FROM GOODS_ORDER)) O 
+			ON (G.SEQ = O.ORDER_GOODS_NUM) 
+			WHEN MATCHED THEN UPDATE SET G.AMOUNT = O.ORDER_GOODS_AMOUNT
+		]]>
+	</update>
+	
+	<update id="dropCheckOutTable">
+		<![CDATA[
+			drop table checkout_temp_${order_member_id} purge
+		]]>
+	</update>
+
+	
+	
+	
+	<delete id="deleteBasket">
+		<![CDATA[
+			DELETE FROM basket WHERE MEMBER_SEQ=${order_member_seq}
+		]]>
+		
+	</delete>
+	
+	<!-- 지현 -->
+	<select id="getOrderList" resultType="order">
+		SELECT
+			O.ORDER_NUM		AS order_num,
+			O.ORDER_TRADENUM		AS order_tradenum,
+			O.ORDER_GOODS_NAME	AS order_goods_name,
+			O.ORDER_GOODS_IMAGE		AS order_goods_image,
+			O.ORDER_GOODS_PRICE		AS order_goods_price,
+			O.ORDER_GOODS_COUNT		AS order_goods_count,
+			O.ORDER_MEMBER_ID		AS order_member_id,
+			O.ORDER_SUM_MONEY		AS order_sum_money,
+			O.ORDER_STATUS		AS order_status,
+			O.ORDER_DATE		AS order_date
+		FROM GOODS_ORDER O
+		<if test='order_member_seq != 1'>
+		WHERE O.ORDER_MEMBER_SEQ = ${order_member_seq}	
+		</if> 
+		order by O.ORDER_DATE DESC
+	</select>
+	
+	<update id="updateOrderStatus">
+		<![CDATA[
+		UPDATE GOODS_ORDER
+		SET ORDER_STATUS = #{order_status}
+		WHERE ORDER_TRADENUM = #{order_tradenum}
+		]]>
+	</update>
+	
+
+</mapper>

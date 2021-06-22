@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="QaaBoardDAOTemp">
+	
+	<insert id="insertBoard">
+		<![CDATA[
+			insert into QAA(seq, id, category, subject, content, image ,re_ref, re_lev) 
+			values((Select nvl(max(seq),0)+1 from QAA), 
+			#{id}, #{category}, #{subject}, #{content}, #{image}, (Select nvl(max(re_ref),0)+1 from QAA), 1)
+		]]>
+	</insert>
+	
+	<update id="updateBoard">
+		<![CDATA[	
+			update QAA set subject=#{subject}, content=#{content} where seq=#{seq}
+		]]>
+	</update>
+	
+	<delete id="deleteBoard">
+		<![CDATA[
+			delete QAA where re_ref=#{re_ref}
+		]]>
+	</delete>
+	
+	<select id="getBoard" resultType="qaa">
+		<![CDATA[
+			select * from QAA where re_ref=#{re_ref} and re_lev=1
+		]]>
+	</select>
+	
+	<select id="getReply" resultType="qaa">
+		<![CDATA[
+			select * from QAA where re_ref=#{re_ref} and re_lev=2
+		]]>
+	</select>	
+	
+	<select id="getBoardList" resultType="qaa">
+		<![CDATA[
+			select * from QAA where re_lev =1 and id=#{id} order by seq desc
+		]]>
+	</select>
+
+</mapper>

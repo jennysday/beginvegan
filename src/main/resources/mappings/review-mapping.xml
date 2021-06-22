@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ReviewDAOTemp">
+
+	<insert id="insertReview">
+		<![CDATA[
+		insert into review(seq, name, user_name, user_id, goods_seq, content_name, image, content, write_date, star) 
+		values((select nvl(max(seq), 0)+1 from review), #{name}, #{user_name}, #{user_id}, #{goods_seq}, #{content_name} ,#{image,  jdbcType=VARCHAR}, #{content}, sysdate, #{star}) 
+		]]>
+		
+	</insert>
+	
+
+	
+	
+	<update id="plusReadcount" parameterType="int">
+		<![CDATA[
+		update review set readcount = readcount +1 where seq = #{seq}
+		]]>
+	</update>
+		
+	<update id="updateReview">
+		<![CDATA[
+		update review set title=#{title}, content=#{content} where seq=#{seq}
+		]]>
+	</update>
+	
+	<delete id="deleteReview">
+		<![CDATA[
+		delete review where seq=#{seq}
+		]]>
+	</delete>
+		
+	<select id="getReviewList" resultType="review">
+		<![CDATA[
+		select * from review where goods_seq=#{goods_seq} order by seq desc
+		]]>
+	</select>
+	
+	<select id="getMyReviewList" resultType="review">
+		
+		select * from review 
+		<if test='user_id != "admin"'>where user_id=#{user_id} </if>
+		order by seq desc
+		
+	</select>
+
+</mapper>

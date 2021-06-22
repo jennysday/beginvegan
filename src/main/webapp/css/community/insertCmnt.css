@@ -1,0 +1,145 @@
+@charset "UTF-8";
+
+.all_wrap {
+	min-height: 600px;
+	margin:150px 0;
+}
+
+.all_wrap h1 {
+	text-align: center;
+	margin: 50px;
+}
+
+.tbl_wrap {
+	width: 100%;
+}
+
+.tbl_wrap .tbl {
+	font-weight: normal;
+	margin: 3% 23%;
+	border-collapse: collapse;
+}
+
+.tbl_wrap .tbl tr:first-child{
+	border-top: 1px solid #3B5E3B;
+}
+
+.category:not(strong) {
+	padding: 10px 6px;
+    text-align: center;
+    color: white;
+    width: 10%;
+	border-bottom: 1px solid white;
+	background-color: #3B5E3B;
+}
+
+strong {
+	padding: 18px;
+    text-align: center;
+    color: #3B5E3B;
+    width: 8%;
+}
+	
+.wrap_padding ul {
+	padding: 7px 0;
+	font-size: small;
+}	
+
+.content {
+	padding-left: 10px;
+	border-bottom: 1px solid #3B5E3B;
+}	
+
+.content_last .category,.content {
+	padding-left: 10px;
+	border-bottom: 1px solid #3B5E3B;
+	border-top: 1px solid #3B5E3B;
+}	
+	
+.tbl_wrap .tbl tr td ul li {
+	display: inline-block;
+    margin-right: 15px;
+    vertical-align: middle;
+    line-height: 24px;
+    color: #333;
+}	
+	
+.txtNum {
+    display: inline-block;
+    word-break: normal;
+}	
+
+.content_tr {
+	width: 100%;
+	border-top: 1px solid #3B5E3B;
+}
+
+.wrap_padding_content {
+	padding: 8px 7px 8px 17px;
+}
+
+.wrap_padding_content img {
+	width: 750%;
+}
+	
+.content_wrap {
+	
+}
+
+.thin_line {
+	border-top:1px solid #243421;
+}
+
+.chk_btn {
+    border-radius: 8px;
+    font-size: 14px;
+    padding: 10px 15px;
+    background-color: #3B5E3B;
+    transition: all 0.3s;
+    color: #ffffff;
+    border: none;
+}
+
+.chk_btn:hover {
+    background-color: #649E64;
+}
+
+.wrap_button_all {
+	width: 1000px;
+    margin: 0 auto;
+}
+
+.wrap_button_first {
+
+}
+
+.wrap_button_all .wrap_button_first .button_left {
+	float: left;
+    text-align: left;
+}
+
+.wrap_button_all .wrap_button_second .button_right {
+	float:right;
+}
+	
+/* .comment { 댓글
+	
+} */
+	
+/* #style { 댓글 input
+	width: 150px; padding: .5em .3em;
+	font-family: inherit; font-size: 2;
+	border-radius: 5px; appearance: none; 
+	-webkit-appearance: none; -moz-appearance: none;
+} */
+	
+/* textarea { 댓글 본문
+	padding: .5em .3em;
+	font-family: inherit; font-size: 2;
+	border-radius: 5px; appearance: none; 
+	-webkit-appearance: none; -moz-appearance: none;
+} */
+	
+/* #button_comment { 댓글 확인 버튼
+
+}	 */

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="GoodsDAOTemp">
+
+<insert id="insertGoods">
+		<![CDATA[
+		insert into goods(seq, category, name, shortco, content, amount, price, image01, image02, image03) 
+		values((select nvl(max(seq), 0)+1 from goods), #{category}, #{name}, #{shortco}, #{content}, #{amount}, #{price}, #{image01, jdbcType=VARCHAR}, #{image02, jdbcType=VARCHAR}, #{image03, jdbcType=VARCHAR}) 
+		]]>
+	</insert>
+	
+	<select id="adminGoodsList" resultType="goods">
+		<![CDATA[
+		select seq, category, name, shortco, amount, price, goods_date from goods order by seq asc
+		]]>
+	</select>
+	
+	<select id="adminGoodsDetail" resultType="goods">
+		<![CDATA[
+		select seq, category, name, shortco, content, amount, price, image01, image02, image03 from goods where seq=#{seq}
+		]]>
+	</select>
+	
+	<update id="modifyGoods">
+		<![CDATA[
+		update goods set seq=#{seq}, category=#{category}, name=#{name}, shortco=#{shortco}, content=#{content}, amount=#{amount}, price=#{price}, image01=#{image01, jdbcType=VARCHAR} , image02=#{image02, jdbcType=VARCHAR}, image03=#{image03, jdbcType=VARCHAR} where seq=#{seq}
+		]]>
+	</update>
+	
+	<delete id="deleteGoods">
+		<![CDATA[
+		delete from goods where seq=#{seq}
+		]]>
+	</delete>
+	
+	<select id="getGoods" resultType="goods">
+		<![CDATA[
+		select * from goods where seq=#{seq}
+		]]>
+	</select>
+	
+	<select id="getGoodsList_A" resultType="goods">
+		<![CDATA[
+		select * from goods order by seq desc
+		]]>
+	</select>
+	
+	<select id="getGoodsList_DI" resultType="goods">
+		<![CDATA[
+		select * from goods where category like '%'||#{searchCondition}||'%' order by seq desc
+		]]>
+	</select>
+	
+	<select id="getGoodsList_F" resultType="goods">
+		<![CDATA[
+		select * from goods where category like '%'||#{searchCondition}||'%' order by seq desc
+		]]>
+	</select>
+	
+	<select id="getGoodsList_DR" resultType="goods">
+		<![CDATA[
+		select * from goods where category like '%'||#{searchCondition}||'%' order by seq desc
+		]]>
+	</select>
+	
+	<select id="getGoodsList_S" resultType="goods">
+		<![CDATA[
+		select * from goods where category like '%'||#{searchCondition}||'%' order by seq desc
+		]]>
+	</select>
+	
+	<select id="getGoodsList_DA" resultType="goods">
+		<![CDATA[
+		select * from goods where category like '%'||#{searchCondition}||'%' order by seq desc
+		]]>
+	</select>
+	
+	<select id="getGoodsList_SN" resultType="goods">
+		<![CDATA[
+		select * from goods where category like '%'||#{searchCondition}||'%' order by seq desc
+		]]>
+	</select>
+	
+</mapper>
+
+
+

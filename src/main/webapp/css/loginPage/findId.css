@@ -1,0 +1,62 @@
+@charset "UTF-8";
+
+input:focus { /* 아이디/비밀번호 커서로 클릭했을 때 */
+   outline-color: #213421;
+}
+
+.login_all_wrap{
+   min-height: 600px;
+}
+
+.login_wrap {
+	padding: 0% 36% 0% 34%;
+}
+
+.login_form{
+   padding: 0% 9% 0%;
+   width: 100%;
+   border: 0px; border-spacing: 0px; 
+}
+
+.tb_login { /* 로그인 */
+   padding: .5em .3em;
+   border: 1px solid #CACAC6;
+   background-color:#213429; color:white;
+   border-radius: 5px; 
+   width: 300px; height:50px; margin: 10px; transition: all 0.3s;
+   font-family: 'Nanum Gothic', sans-serif; font-size:12pt;
+}
+
+.tb_login:hover { /* input 단추 hover */
+   background-color: #3d5b3d;
+   color: white;
+}
+
+.tb_join { /* 회원가입 */
+   padding: .5em .3em;
+   border: 1px solid #CACAC6;
+   background-color:white; color:#213429;
+   border-radius: 5px; 
+   -webkit-appearance: none;
+}
+
+.tb_join a {
+	font-family: 'Nanum Gothic', sans-serif; text-align:center;
+	text-decoration: none;
+	display: inline-block; width: 300px; 
+}
+
+.tb_searchidpw {
+   width: 70px; padding: .5em .3em;
+   font-family: inherit; font-size: 10pt;
+   background-color:white; color: #213429;
+   border-radius: 5px; appearance: none; 
+   -webkit-appearance: none; -moz-appearance: none;
+   font-family: 'Nanum Gothic', sans-serif; text-decoration: none;
+   text-align: right;
+}
+
+.tb_idpw {
+	font-family: 'Nanum Gothic', sans-serif; 
+	width: 305px; height: 50px; margin: 5px 5px; 
+}

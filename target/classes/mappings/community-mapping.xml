@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 커뮤니티 데이터 -->	
+<mapper namespace="CommunityDAOTemp">
+
+	<!-- 커뮤니티 글 작성 -->
+	<insert id="insertCmnt"> 
+		<![CDATA[ insert into community(seq, category, writer, subject, content, cmnt_file, readcount, re_ref, re_lev, re_seq )
+						values((select nvl(max(seq),0)+1 from community), #{category}, #{writer}, #{subject}, #{content}, #{cmnt_file}, #{readcount}, 
+									(select nvl(max(seq),0)+1 from community), 0, 0 ) ]]> 
+	</insert>
+	
+	<!-- 커뮤니티 댓글 작성 -->
+	<insert id="insertCmntReply"> 
+		<![CDATA[ insert into community(seq, writer, content, re_ref, re_lev, re_seq )
+						values(#{seq}, #{writer}, #{content}, #{seq}, #{re_lev+1}, #{re_seq} ) ]]> 
+	</insert>
+	
+	<!-- 댓글 seq 업데이트 -->
+	<update id="updateCmntReplySeq">
+		<![CDATA[ update community 
+						set re_seq=re_seq+1 where re_ref=#{re_ref} and re_seq>{re_seq} ]]>
+	</update>
+
+	<!-- 조회수 업데이트 -->
+	<update id="updateReadcount">
+		<![CDATA[ update community 
+						set readcount=readcount+1 where seq=#{seq} ]]>
+	</update>
+	
+	<select id="getCmnt" resultType="community">
+		<![CDATA[ select * from community where seq=#{seq} ]]>
+	</select> 
+	
+	<!-- 글 목록 총 개수
+	<select id="getListCount" resultType="int">
+		<![CDATA[ select count(*) from community ]]>
+	</select>  -->
+	 
+	 <!-- 검색 기능(제목) -->
+	<select id="getCmntList_S" resultType="community">
+		<![CDATA[ select * from community
+						 where subject like '%'||#{searchKeyword}||'%' 
+						 order by seq desc ]]>
+	</select>
+	
+	<!-- 검색 기능(내용) -->
+	<select id="getCmntList_C" resultType="community">
+		<![CDATA[ select * from community
+						 where content like '%'||#{searchKeyword}||'%' 
+						 order by seq desc ]]>
+	</select>
+
+	<!-- select(레시피) -->
+	<select id="getCmntList_RP" resultType="community">
+		<![CDATA[ select * from community where category='레시피' order by seq desc ]]>
+	</select>
+	
+	<!-- select(식당 정보) -->
+	<select id="getCmntList_RT" resultType="community">
+		<![CDATA[ select * from community where category='식당 정보' order by seq desc ]]>
+	</select>
+	
+	<update id="updateCmnt" >
+		<![CDATA[ update community 
+						set subject=#{subject}, content=#{content} where seq=#{seq} ]]>
+	</update>
+	
+	<delete id="deleteCmnt">
+		<![CDATA[ delete from community where seq=#{seq} ]]>
+	</delete>	
+
+</mapper>

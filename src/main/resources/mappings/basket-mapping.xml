@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="basketMapper">
+
+	<select id="getBasketList" resultType="basket"> <!-- resultType은 반환형 -->
+		SELECT                                         
+			G.SEQ		    AS goodsSeq,
+			B.AMOUNT 	AS amount,
+			G.NAME		AS goodsName,
+			G.IMAGE01		AS image,
+			G.PRICE		AS price,
+			M.NAME		AS memberName,
+			G.AMOUNT		AS goodsAmount
+		FROM BASKET B 
+		JOIN GOODS G ON B.GOODS_SEQ = G.SEQ 
+		JOIN MEMBER M ON B.MEMBER_SEQ = M.SEQ 
+		<if test='memberId != "admin"'>  
+		WHERE B.MEMBER_SEQ = #{memberSeq} 
+		</if>		
+		ORDER BY B.reg_date
+ 
+	</select>
+
+
+	<delete id="deleteBasket">		
+		<![CDATA[
+		DELETE FROM BASKET 
+		WHERE GOODS_SEQ = #{goodsSeq} AND MEMBER_SEQ = #{memberSeq}
+		]]>
+	</delete>
+	
+	<insert id="addBasket">
+		<![CDATA[
+		INSERT INTO BASKET(MEMBER_SEQ, GOODS_SEQ, AMOUNT, REG_DATE) 
+		VALUES (#{memberSeq}, #{goodsSeq}, #{amount}, SYSDATE)
+		]]>
+	</insert>
+	
+	<select id="getAmount" resultType="Integer">
+		<![CDATA[
+		SELECT AMOUNT
+		FROM BASKET
+		WHERE MEMBER_SEQ = #{memberSeq} AND GOODS_SEQ = #{goodsSeq}
+		]]> 
+	</select>
+	
+	<update id="updateAmount">
+		<![CDATA[
+		UPDATE BASKET SET AMOUNT = #{amount}
+		WHERE GOODS_SEQ = #{goodsSeq} AND MEMBER_SEQ = #{memberSeq}
+		]]> 
+	</update> 
+
+</mapper>
