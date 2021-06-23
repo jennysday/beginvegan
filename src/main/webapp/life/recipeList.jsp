@@ -30,8 +30,7 @@
 	text-align: center;
 }
 .list{
-	margin-left: 0.5%;
-	display: inline-block;
+	padding-left:7%;
 }
 div.gallery {
 	display: inline-block;
@@ -50,9 +49,9 @@ div.desc {
 }
 * {box-sizing: border-box;}
 .responsive {
-  	padding: 10px 6px;
-	float: left;
-  	width: 24.99999%;
+    margin: 10px 0;
+    display: inline-block;
+    width: 30%;
 }
 .clearfix:after {
   	content: "";
