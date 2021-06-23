@@ -2,7 +2,11 @@
 
 ![localhost_8090_board_main_main jsp](https://user-images.githubusercontent.com/79234825/123103858-5e18ab00-d471-11eb-9ca5-92d16a09432f.png)
 
+<hr>
+
 ![localhost_8090_board_main_companyInfo jsp](https://user-images.githubusercontent.com/79234825/123104015-87393b80-d471-11eb-9ad6-22f8732440ff.png)
+
+<hr>
 
 ![localhost_8090_board_getGoodsList go](https://user-images.githubusercontent.com/79234825/123104171-b059cc00-d471-11eb-8315-10ce67c7a6a8.png)
 
