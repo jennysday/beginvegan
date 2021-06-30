@@ -4,6 +4,8 @@ https://drive.google.com/file/d/1BioZ8JPQVyLb18kVyaG0UXFN0LxDild8/view?usp=shari
 
 ![localhost_8090_board_main_main jsp (2)](https://user-images.githubusercontent.com/79234825/123893054-a74b8c00-d996-11eb-97b7-7f177408301e.png)
 
+<hr>
+
 ![localhost_8090_board_main_main jsp](https://user-images.githubusercontent.com/79234825/123103858-5e18ab00-d471-11eb-9ca5-92d16a09432f.png)
 
 <hr>
@@ -56,7 +58,7 @@ https://drive.google.com/file/d/1BioZ8JPQVyLb18kVyaG0UXFN0LxDild8/view?usp=shari
 
 <hr>
 
-![localhost_8090_board_getMyPage me (1)](https://user-images.githubusercontent.com/79234825/123106927-09c2fa80-d474-11eb-8796-c631f6037986.png)
+![localhost_8090_board_orderList od (1)](https://user-images.githubusercontent.com/79234825/123895843-77eb4e00-d99b-11eb-9a31-b717f1e7b934.png)
 
 <hr>
 
@@ -74,9 +76,6 @@ https://drive.google.com/file/d/1BioZ8JPQVyLb18kVyaG0UXFN0LxDild8/view?usp=shari
 
 ![localhost_8090_board_adminGoodsList go](https://user-images.githubusercontent.com/79234825/123107842-dcc31780-d474-11eb-95e0-ab53c666345c.png)
 
-<hr>
-
-![localhost_8090_board_orderList od](https://user-images.githubusercontent.com/79234825/123107717-bdc48580-d474-11eb-9133-4b3abc2ee883.png)
 
 <hr>
 
