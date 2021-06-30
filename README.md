@@ -58,7 +58,7 @@ https://drive.google.com/file/d/1BioZ8JPQVyLb18kVyaG0UXFN0LxDild8/view?usp=shari
 
 <hr>
 
-![localhost_8090_board_basketList do](https://user-images.githubusercontent.com/79234825/123107272-59092b00-d474-11eb-97b0-7e2b6e64506f.png)
+![localhost_8090_board_basketList do (2)](https://user-images.githubusercontent.com/79234825/123897269-0fea3700-d99e-11eb-9ffe-a148939ddd12.png)
 
 <hr>
 
