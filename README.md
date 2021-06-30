@@ -2,6 +2,7 @@
 
 https://drive.google.com/file/d/1BioZ8JPQVyLb18kVyaG0UXFN0LxDild8/view?usp=sharing
 
+![localhost_8090_board_main_main jsp (2)](https://user-images.githubusercontent.com/79234825/123893054-a74b8c00-d996-11eb-97b7-7f177408301e.png)
 
 ![localhost_8090_board_main_main jsp](https://user-images.githubusercontent.com/79234825/123103858-5e18ab00-d471-11eb-9ca5-92d16a09432f.png)
 
