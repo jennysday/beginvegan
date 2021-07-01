@@ -79,7 +79,7 @@
                   <td width="10%" class="under__line">상품명</td>
                   <td width="15%" class="under__line">상품이미지</td>
                   <td width="5%" class="under__line">수량</td>
-                  <td width="15%" class="under__line">상품 금액</td>
+                  <td width="15%" class="under__line">주문 금액</td>
                   <td width="17%" class="under__line">주문 상태</td>
                   <td width="15%" class="under__line">주문 날짜</td>
                </tr>
