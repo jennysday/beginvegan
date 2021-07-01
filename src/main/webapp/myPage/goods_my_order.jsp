@@ -104,7 +104,7 @@
                               src="/board/GoodsUpload/${order.order_goods_image}" width=50 height=50>
                         </td>
                         <td>${order.order_goods_count}</td>
-                        <td><fmt:formatNumber value="${order.order_goods_price}" pattern="#,###" /><td>
+                        <td><fmt:formatNumber value="${order.order_goods_price * order.order_goods_count}" pattern="#,###" /><td>
                         
                         <div>
                            <div id="order__text__${order.order_tradenum}">

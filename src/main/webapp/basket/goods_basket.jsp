@@ -92,7 +92,11 @@
 												onClick='plusClick("${basket.goodsSeq}",${basket.goodsAmount}, ${basket.price})' />
 										</c:if></div></td>
 									<%-- <td><fmt:formatNumber value="${basket.price}" pattern="#,###"/></td> --%>
-									<td><span id="pr__${basket.goodsSeq}">${basket.price * basket.amount}</span></td>
+									<td>
+									<span id="pr__${basket.goodsSeq}">
+										<fmt:formatNumber value="${basket.price * basket.amount}" pattern="#,###"/>	
+									</span>
+									</td>
 									<c:if test='${member.id != "admin"}'>
 									<td> <a
 											href="deleteBasket.do?goodsSeq=${basket.goodsSeq}"
