@@ -52,7 +52,7 @@
 							<td width="15%" class="under__line">사진</td>
 							<td width="25%" class="under__line">제품명</td>
 							<td width="30%" class="under__line">수량</td>
-							<td width="10%" class="under__line">가격</td>
+							<td width="10%" class="under__line">주문금액</td>
 							<c:if test='${member.id != "admin"}'>
 								<td width="10%" class="under__line">취소</td>
 							</c:if>
@@ -91,7 +91,8 @@
 											<input type="hidden" value="+"
 												onClick='plusClick("${basket.goodsSeq}",${basket.goodsAmount}, ${basket.price})' />
 										</c:if></div></td>
-									<td><fmt:formatNumber value="${basket.price}" pattern="#,###"/></td>
+									<%-- <td><fmt:formatNumber value="${basket.price}" pattern="#,###"/></td> --%>
+									<td><span id="pr__${basket.goodsSeq}">${basket.price * basket.amount}</span></td>
 									<c:if test='${member.id != "admin"}'>
 									<td> <a
 											href="deleteBasket.do?goodsSeq=${basket.goodsSeq}"
@@ -173,6 +174,10 @@
 						qs.innerHTML = amount;
 						var mqs = document.querySelector('#sum__money');
 						mqs.innerHTML = numberWithCommas(Number(mqs.innerHTML.replaceAll(",","")) + price);
+						
+						var pri = document.querySelector('#pr__' + goodsSeq);//각각 합계
+						//console.log(pri)
+						pri.innerHTML = numberWithCommas(Number(pri.innerHTML.replaceAll(",","")) + price);
 					}else{
 						alert('로그인하세요');
 						location.href="/board";
