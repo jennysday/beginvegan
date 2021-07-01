@@ -51,15 +51,15 @@ https://drive.google.com/file/d/1BioZ8JPQVyLb18kVyaG0UXFN0LxDild8/view?usp=shari
 
 <hr>
 
-![localhost_8090_board_getMyPage me (2)](https://user-images.githubusercontent.com/79234825/123106905-06c80a00-d474-11eb-93a7-11f1a53e4287.png)
+![localhost_8090_board_getMyPage me (5)](https://user-images.githubusercontent.com/79234825/124143312-fcd28680-dac5-11eb-8489-e9a163265a1d.png)
 
 <hr>
 
-![localhost_8090_board_orderList od (1)](https://user-images.githubusercontent.com/79234825/123895843-77eb4e00-d99b-11eb-9a31-b717f1e7b934.png)
+![localhost_8090_board_orderList od (2)](https://user-images.githubusercontent.com/79234825/124143276-f17f5b00-dac5-11eb-8aba-49e257144a4a.png)
 
 <hr>
 
-![localhost_8090_board_basketList do (2)](https://user-images.githubusercontent.com/79234825/123897269-0fea3700-d99e-11eb-9ffe-a148939ddd12.png)
+![localhost_8090_board_basketList do (3)](https://user-images.githubusercontent.com/79234825/124143228-e88e8980-dac5-11eb-9e14-2aed01e12433.png)
 
 <hr>
 
