@@ -20,6 +20,7 @@ delete member; where seq=2 and seq=3;
 --ADMIN을 무조건 1번으로 해주세요.
 insert into member values(1,'admin','admin','관리자','','',0,0,0,'','',0,sysdate);
 insert into member values(2,'aa','aa','aa','aa123@gmail.com','yes',111,111,01011111111,'집1','상세1',940616,sysdate);
+insert into member values(3,'bb','bb','bb','aa123@gmail.com','yes',111,111,01011111111,'집1','상세1',940616,sysdate);
 
 --주소 
 DROP TABLE ZIPCODE;
